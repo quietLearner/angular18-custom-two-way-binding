@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, model } from '@angular/core';
 
 @Component({
   selector: 'app-rect',
@@ -9,12 +9,20 @@ import { Component, input, output } from '@angular/core';
 })
 export class RectComponent {
   // Angular recognizes size and sizeChange as a two-way binding pair.
-  size = input.required<{ width: number; height: number }>();
-  //The convention is inputName + Change, with a capital C.
-  sizeChange = output<{ width: number; height: number }>();
+  // size = input.required<{ width: number; height: number }>();
+  // //The convention is inputName + Change, with a capital C.
+  // sizeChange = output<{ width: number; height: number }>();
+
+  // easier way
+  size = model.required<{ width: number; height: number }>();
 
   onReset() {
-    this.sizeChange.emit({
+    // this.sizeChange.emit({
+    //   width: 200,
+    //   height: 100,
+    // });
+
+    this.size.set({
       width: 200,
       height: 100,
     });
