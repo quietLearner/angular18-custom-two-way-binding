@@ -1,13 +1,20 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RectComponent } from './rect/rect.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  imports: [FormsModule, RectComponent],
 })
 export class AppComponent {
-  title = 'angular18-custom-two-way-binding';
+  rectSize = signal<{ width: number; height: number }>({
+    width: 100,
+    height: 100,
+  });
+
+  updateDimension(dimension: 'width' | 'height', value: number) {
+    this.rectSize.update((size) => ({ ...size, [dimension]: value }));
+  }
 }
